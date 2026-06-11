@@ -33,6 +33,8 @@ Read `.planning/PROJECT.md` (`## Roadmap`, `## State`) and `.planning/REQUIREMEN
 
 ## 2. Operations
 
+Whenever you ask the user to choose (which requirements a phase covers, its success criteria, whether to remove a phase), lead with a concrete recommendation and a one-line *why* — never a bare menu. If the user defers to you, state your pick and confirm rather than deciding silently.
+
 **add "<name>"** — Append a new phase at the end. Interview briefly (freeform or 1-2 AskUserQuestion) for: goal (an outcome, not tasks), which requirements it covers, and 2-5 success criteria. Add both the checklist line and the `### Phase N:` detail block. Update REQUIREMENTS.md traceability for any requirements now mapped here.
 
 **insert <after> "<name>"** — Insert an urgent phase using a decimal number (e.g. insert after 2 → `Phase 2.1`). Decimal phases sort between their integer neighbors and execute in numeric order. Mark the detail block heading with `(inserted)`. Gather goal + success criteria as in `add`.

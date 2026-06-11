@@ -247,6 +247,33 @@ When it returns, show the user the key findings (stack, table stakes, watch-outs
 git add .planning/FEATURES.md .planning/ARCHITECTURE.md 2>/dev/null; git commit -m "docs: research project domain" >/dev/null 2>&1 || true
 ```
 
+## 6b. Architecture decision (greenfield, non-trivial)
+
+**Run this only for greenfield projects that are more than a script or a single-page tool** — anything with multiple components, a data layer, or real structural choices. For a trivial project, skip this step and keep the researched `ARCHITECTURE.md` as-is. If you're unsure whether it qualifies, ask the user with one AskUserQuestion ("This looks substantial enough to be worth a quick architecture decision — want me to lay out a couple of options, or keep it simple?").
+
+When it qualifies, **don't just accept one architecture** — put real options on the table:
+
+1. **Generate 2–3 decisive proposals**, each with a different bias. Build them from the interview + the research baseline in `ARCHITECTURE.md`/`FEATURES.md`. Generate them inline, or spawn one subagent told to argue all three stances if the main thread is heavy:
+   - **(a) Minimal** — the simplest thing that delivers the core value; least to build and maintain.
+   - **(b) Clean / maintainable** — the structure that ages best; clear seams, easy to extend.
+   - **(c) Pragmatic balance** — ships fast without painting into a corner.
+
+   Each proposal must be **DECISIVE — one committed approach, no option lists inside it** — and contain:
+   - **Decision + rationale** — what it is and why, in one tight paragraph.
+   - **Trade-offs** — what you gain and what you give up.
+   - **Component breakdown** — each component: what it does · how you'd use it · what it depends on.
+   - **Build sequence** — the order you'd build it in.
+
+2. **Present the trade-offs with YOUR recommendation.** Lay the proposals side by side, then state which one you'd pick and *why* — never a bare menu. AskUserQuestion to choose (put your recommended option first, labeled "(Recommended)"). If the user says "whatever you think is best": state your recommendation explicitly and ask for a one-word confirmation before proceeding — don't silently decide.
+
+3. **Walk the chosen design section by section for approval** — present the component breakdown, get a nod, then the build sequence, then any key patterns. Do **not** dump the whole design at once and ask "good?". Incorporate the user's adjustments as you go.
+
+4. **Write the approved design into `.planning/ARCHITECTURE.md`** (refine/replace the researched baseline; keep the research `## Sources`). Record the decision and the **rejected alternatives** in PROJECT.md's `## Key Decisions` table (e.g. `| Architecture: chose [B] clean/maintainable | [why] | Rejected: [A] too thin for the data layer, [C] over-built for v1 |`). Commit:
+
+```bash
+git add .planning/ARCHITECTURE.md .planning/PROJECT.md && git commit -m "docs: decide project architecture" >/dev/null 2>&1 || true
+```
+
 ## 7. Define requirements + roadmap
 
 ```
