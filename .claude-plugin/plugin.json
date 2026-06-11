@@ -1,0 +1,20 @@
+{
+  "name": "lite",
+  "displayName": "gsd-lite",
+  "version": "0.1.0",
+  "description": "A lightweight, Claude-Code-native framework for spec-driven development: map the codebase, interview to capture intent, research, plan, and execute — with a slim 4-file-per-phase footprint.",
+  "author": {
+    "name": "Siddharth Khattar"
+  },
+  "license": "MIT",
+  "keywords": [
+    "spec-driven-development",
+    "planning",
+    "interview",
+    "codebase-mapping",
+    "context-engineering",
+    "claude-code"
+  ],
+  "commands": "./commands/lite/",
+  "agents": "./agents/"
+}
