@@ -33,8 +33,8 @@ new idea ──────────▶ /lite:start      interview → PROJEC
 - **/lite:map** `[--paths a,b,c] [--refresh]` — Map an existing codebase into a consolidated `ARCHITECTURE.md` (stack, structure, conventions, testing, integrations) and `CONCERNS.md` (tech debt, risks). Run before `/lite:start` on existing projects.
 - **/lite:start** `[--skip-research]` — Initialize a project. Detects greenfield vs brownfield, runs the deep interview, and writes `PROJECT.md` (vision + roadmap + state), `REQUIREMENTS.md`, `FEATURES.md`, and an initial roadmap.
 - **/lite:discuss** `<phase>` — The per-phase interview. Surfaces the real implementation decisions ("gray areas"), asks one focused question at a time, and locks answers into `CONTEXT.md`.
-- **/lite:plan** `<phase> [--skip-research] [--skip-check]` — Research the phase (`RESEARCH.md`), write a single `PLAN.md` with all substeps, and run a plan-quality check before execution.
-- **/lite:execute** `<phase> [--skip-verify]` — Build the plan with atomic commits, track progress inline in `PLAN.md`, verify against the phase goal, and write `SUMMARY.md`.
+- **/lite:plan** `<phase> [--skip-research] [--skip-check]` — Research the phase (`RESEARCH.md`), write a single `PLAN.md` with all steps (each sized for one fresh executor), and run a plan-quality check before execution.
+- **/lite:execute** `<phase> [--skip-verify]` — Orchestrate the plan one step at a time: dispatch a fresh subagent per step, inspect each result against the real diff, fix or re-plan as needed, then verify against the phase goal and write `SUMMARY.md`. Atomic commits throughout.
 - **/lite:phase** `add|insert|edit|remove …` — Manage the flat phase roadmap in `PROJECT.md`.
 - **/lite:status** — Where am I? Per-phase progress, decisions, blockers, and the next sensible command.
 - **/lite:view** — Render the architecture diagrams (Mermaid) and roadmap from `ARCHITECTURE.md`/`PROJECT.md` into a self-contained `.planning/view.html` and open it in the browser. No build step.
@@ -54,7 +54,7 @@ new idea ──────────▶ /lite:start      interview → PROJEC
 └── phases/NN-slug/
     ├── NN-CONTEXT.md   the interview: locked decisions + canonical refs
     ├── NN-RESEARCH.md  how experts build this phase
-    ├── NN-PLAN.md      substeps + plan + inline execution & verification state
+    ├── NN-PLAN.md      steps + plan + inline execution & verification state
     └── NN-SUMMARY.md   what shipped
 ```
 

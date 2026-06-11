@@ -22,7 +22,7 @@ View and edit `.planning/config.json` — the small set of toggles that shape ho
   "research": true,                       // run research before planning each phase (and the project)
   "plan_check": true,                     // run the plan-quality gate before executing
   "verifier": true,                       // run goal-backward verification after executing
-  "parallel": true,                       // allow independent substeps to run in parallel during execution
+  "parallel": true,                       // run independent read-only subagents (e.g. the two codebase-mapping passes) in parallel; phase execution is always sequential, one step at a time
   "commit_docs": true,                    // commit planning docs to git (false → add .planning/ to .gitignore)
   "model_profile": "inherit | quality | balanced | budget"  // model tier for spawned subagents
 }
