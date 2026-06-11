@@ -68,6 +68,24 @@ When **Focus: architecture**, write `.planning/ARCHITECTURE.md` as ONE consolida
 
 **Entry points:** [where execution/requests begin — `path`]
 
+## System diagram
+<!-- 1–3 validated Mermaid blocks. Keep each ≤ ~25 nodes; collapse detail into subgraph labels. See <mermaid_diagrams>. -->
+
+```mermaid
+flowchart TD
+  subgraph Layer A
+    a1["Module A"]
+  end
+  subgraph Layer B
+    b1["Module B"]
+  end
+  a1 --> b1
+  click a1 "src/a/index.ts"
+  click b1 "src/b/index.ts"
+```
+
+[Optionally a second block: a `flowchart`/`sequenceDiagram` of the core data flow (request → … → storage).]
+
 ## Structure
 [Directory layout with one-line purpose per key folder. Key locations (config, routes, models, tests). Naming conventions observed.]
 
@@ -120,6 +138,20 @@ When **Focus: concerns**, write `.planning/CONCERNS.md`:
 *Concerns audit: [date]*
 ```
 </focus_concerns>
+
+<mermaid_diagrams>
+For the **architecture** focus, the `## System diagram` section holds 1–3 Mermaid blocks that render for free in GitHub/VS Code/Obsidian:
+1. **Module/component graph** (`flowchart TD`): top-level modules and their dependency arrows, grouped with `subgraph` per layer. Every node that maps to a real file/dir gets `click <nodeId> "<relative path>"`.
+2. **Data-flow diagram** of the core flow (request → … → storage), where meaningful.
+3. Optionally a `sequenceDiagram` of the single most important interaction.
+
+**Keep them modest:** ≤ ~25 nodes per diagram; collapse detail into subgraph labels rather than exploding nodes.
+
+**Validate before writing (mandatory):**
+- **Every `click` path must exist** — check each with `[ -e "<path>" ]` (or `test -e`). Drop or fix any `click` whose path doesn't resolve.
+- **Validate Mermaid syntax** — use a Mermaid validation/render MCP tool if one is available in this session; else `npx -y @mermaid-js/mermaid-cli -i <tmp.mmd> -o /dev/null` if node is available; else carefully self-check node IDs, quoting, and arrow syntax by hand.
+- **On failure:** fix and retry, max 2 retries. If it still won't validate, write the block fenced as ` ```text ` with a one-line note (`<!-- diagram failed validation: <reason> -->`) so the doc never ships a broken render.
+</mermaid_diagrams>
 
 <output>
 After writing your document, return ONLY (for architecture focus, echo the orientation's key-files list so the orchestrator can read those files itself rather than trusting the summary):

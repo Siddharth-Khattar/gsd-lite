@@ -37,6 +37,7 @@ new idea ──────────▶ /lite:start      interview → PROJEC
 - **/lite:execute** `<phase> [--skip-verify]` — Build the plan with atomic commits, track progress inline in `PLAN.md`, verify against the phase goal, and write `SUMMARY.md`.
 - **/lite:phase** `add|insert|edit|remove …` — Manage the flat phase roadmap in `PROJECT.md`.
 - **/lite:status** — Where am I? Per-phase progress, decisions, blockers, and the next sensible command.
+- **/lite:view** — Render the architecture diagrams (Mermaid) and roadmap from `ARCHITECTURE.md`/`PROJECT.md` into a self-contained `.planning/view.html` and open it in the browser. No build step.
 - **/lite:config** `[get | set <key> <value>]` — View or change workflow toggles (research, gates, mode, granularity, models).
 - **/lite:help** `[<command>]` — This reference.
 

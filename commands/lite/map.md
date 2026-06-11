@@ -61,6 +61,7 @@ Explore the codebase and write .planning/ARCHITECTURE.md as a SINGLE consolidate
   ## Codebase orientation — FIRST section, HARD CAP ~60 lines: top-level directories with one-line descriptions, entry points (path:line), where tests live + how to run them, and a 'Key files (read these first)' list of 5-10 load-bearing files each with path:line + a one-phrase reason.
   ## Stack — languages, runtime, frameworks, key dependencies (with versions), package manager, build/config.
   ## System Overview — a data-flow diagram (arrows, conceptual components) + component responsibilities table with file paths.
+  ## System diagram — 1-3 VALIDATED Mermaid blocks (module/component flowchart with subgraph layers and 'click nodeId \"path\"' links to real files; plus a data-flow diagram where meaningful). Keep each <=25 nodes. Validate before writing: every click path must exist on disk, and the Mermaid must pass a validation/render MCP tool if available, else 'npx -y @mermaid-js/mermaid-cli', else careful self-check; on repeated failure write the block as plain text with a note rather than shipping a broken render.
   ## Structure — directory layout, key locations, naming conventions.
   ## Conventions — code style, naming, import organization, error handling.
   ## Testing — framework, test layout, run commands, mocking, coverage.

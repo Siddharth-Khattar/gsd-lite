@@ -268,7 +268,7 @@ When it qualifies, **don't just accept one architecture** — put real options o
 
 3. **Walk the chosen design section by section for approval** — present the component breakdown, get a nod, then the build sequence, then any key patterns. Do **not** dump the whole design at once and ask "good?". Incorporate the user's adjustments as you go.
 
-4. **Write the approved design into `.planning/ARCHITECTURE.md`** (refine/replace the researched baseline; keep the research `## Sources`). Record the decision and the **rejected alternatives** in PROJECT.md's `## Key Decisions` table (e.g. `| Architecture: chose [B] clean/maintainable | [why] | Rejected: [A] too thin for the data layer, [C] over-built for v1 |`). Commit:
+4. **Write the approved design into `.planning/ARCHITECTURE.md`** (refine/replace the researched baseline; keep the research `## Sources`). Include a `## System diagram` with a Mermaid `flowchart TD` of the planned components grouped into `subgraph` layers — **syntax-validate it** (Mermaid MCP if available, else `npx -y @mermaid-js/mermaid-cli`, else self-check), but **omit `click` file links for now** since nothing is built yet; `/lite:execute` wires those in as modules appear. Record the decision and the **rejected alternatives** in PROJECT.md's `## Key Decisions` table (e.g. `| Architecture: chose [B] clean/maintainable | [why] | Rejected: [A] too thin for the data layer, [C] over-built for v1 |`). Commit:
 
 ```bash
 git add .planning/ARCHITECTURE.md .planning/PROJECT.md && git commit -m "docs: decide project architecture" >/dev/null 2>&1 || true

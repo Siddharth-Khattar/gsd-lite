@@ -8,7 +8,7 @@ The thing that makes it worth using is the **interview**. Before any code is wri
 
 ## Why "lite"
 
-- **One namespace, nine commands.** No sprawling surface area.
+- **One namespace, ten commands.** No sprawling surface area.
 - **4 files per phase**, not a folder of a dozen. A phase is: the interview (`CONTEXT`), the research (`RESEARCH`), one plan that also tracks its own execution state (`PLAN`), and one wrap-up (`SUMMARY`).
 - **4 docs at the root** — `PROJECT.md` (vision + roadmap + live state in one place), `REQUIREMENTS.md`, `ARCHITECTURE.md`, `FEATURES.md`.
 - **Claude Code only.** No multi-runtime shims, no external CLI to install.
@@ -57,7 +57,7 @@ To uninstall the copied files: `./install.sh --uninstall /path/to/your/project`.
 
 Execution makes one clean, modular commit per step with concise, imperative messages. Commit messages carry **no signatures, trailers, or attribution** (no `Co-Authored-By`, no "Generated with") — just the change description.
 
-Supporting commands: **`/lite:phase`** (add/edit/insert/remove phases), **`/lite:status`** (where am I?), **`/lite:config`** (toggles), **`/lite:help`**.
+Supporting commands: **`/lite:phase`** (add/edit/insert/remove phases), **`/lite:status`** (where am I?), **`/lite:view`** (render the architecture diagrams + roadmap to an HTML page), **`/lite:config`** (toggles), **`/lite:help`**.
 
 ## Determinism helper
 
