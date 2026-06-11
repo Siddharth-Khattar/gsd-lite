@@ -57,14 +57,15 @@ Spawn **two** `lite-codebase-mapper` subagents in parallel (fresh context each, 
 ```
 Agent(subagent_type="lite-codebase-mapper", description="Map architecture",
   prompt="Focus: architecture. Today: [TODAY]. Scope: [full repo | --paths <list>].
-Explore the codebase and write .planning/ARCHITECTURE.md as a SINGLE consolidated document with these sections:
+Explore the codebase and write .planning/ARCHITECTURE.md as a SINGLE consolidated document, opening with a tight orientation map and then going deep:
+  ## Codebase orientation — FIRST section, HARD CAP ~60 lines: top-level directories with one-line descriptions, entry points (path:line), where tests live + how to run them, and a 'Key files (read these first)' list of 5-10 load-bearing files each with path:line + a one-phrase reason.
   ## Stack — languages, runtime, frameworks, key dependencies (with versions), package manager, build/config.
   ## System Overview — a data-flow diagram (arrows, conceptual components) + component responsibilities table with file paths.
   ## Structure — directory layout, key locations, naming conventions.
   ## Conventions — code style, naming, import organization, error handling.
   ## Testing — framework, test layout, run commands, mocking, coverage.
   ## Integrations — external APIs, databases, auth providers, webhooks.
-Always include real file paths in backticks. Use [TODAY] for any date. Return confirmation + line count only.")
+Always include real file paths in backticks. Use [TODAY] for any date. Return confirmation + line count + the orientation's key-files list.")
 ```
 
 **Agent 2 — Concerns focus** (writes `.planning/CONCERNS.md`):

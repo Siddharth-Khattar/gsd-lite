@@ -33,11 +33,24 @@ ls .eslintrc* .prettierrc* jest.config.* vitest.config.* pytest.ini tox.ini 2>/d
 </discovery>
 
 <focus_architecture>
-When **Focus: architecture**, write `.planning/ARCHITECTURE.md` as ONE consolidated document:
+When **Focus: architecture**, write `.planning/ARCHITECTURE.md` as ONE consolidated document. It opens with a tight **orientation map** (the cheap, always-relevant overview) and then goes deep:
 
 ```markdown
 # Architecture
 **Mapped:** [date]
+
+## Codebase orientation
+<!-- The cheap always-relevant map. HARD CAP ~60 lines — collapse detail, don't exhaust it. -->
+**Top-level layout:**
+- `dir/` — [one line: what lives here]
+- `dir/` — [one line]
+
+**Entry points:** [where execution/requests begin — `path:line`]
+**Tests live in:** [`path`] — run with `[command]`
+
+**Key files (read these first):**
+- `path/to/file.ts:NN` — [one-phrase why it's load-bearing]
+[5–10 of the most important files, each with `path:line`.]
 
 ## Stack
 - **Languages:** [language + version — where used]
@@ -109,11 +122,14 @@ When **Focus: concerns**, write `.planning/CONCERNS.md`:
 </focus_concerns>
 
 <output>
-After writing your document, return ONLY:
+After writing your document, return ONLY (for architecture focus, echo the orientation's key-files list so the orchestrator can read those files itself rather than trusting the summary):
 ```
 ## Mapping complete
 Focus: [architecture|concerns]
 Wrote: .planning/[FILE].md ([N] lines)
+Key files (architecture focus only):
+- `path:line` — [one-phrase why]
+[5–10, matching the orientation section]
 ```
 Do not paste the document contents back.
 </output>

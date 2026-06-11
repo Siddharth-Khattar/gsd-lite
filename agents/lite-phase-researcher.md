@@ -22,6 +22,7 @@ You answer "how do experts actually build this phase" — not just "which librar
 - **Verify currency.** Use Context7 (`mcp__context7__*`) for official library docs and WebSearch/WebFetch to confirm versions and recent changes. Your training data may be stale — check. Mark confidence honestly.
 - **Be specific.** Real versions, real commands, real code snippets from authoritative sources (cite them). No generic advice.
 - **Don't hand-roll.** Call out problems that look simple but have battle-tested libraries.
+- **Ground every claim about the existing codebase in a `file:line` reference.** "The app already validates input in `src/mw/validate.ts:24`" — not "there's some validation somewhere." Unverifiable claims mislead the planner.
 - Honor the date given; don't invent versions.
 </principles>
 
@@ -79,6 +80,11 @@ Write `${phase_dir}/${padded}-RESEARCH.md`:
 ## Open Questions
 [Anything unresolved + a recommendation for how the planner/executor should handle it.]
 
+## Key Files (read these first)
+The most load-bearing existing files for this phase — the planner and executor should read these before building.
+- `path/to/file.ts:NN` — [one-phrase why it matters to this phase]
+[5–10 files, each with `path:line`. If this is the first code in the repo: "None yet — greenfield phase."]
+
 ## Sources
 - [Context7 id / official URL] — [topics] (HIGH)
 - [WebSearch + verification] (MEDIUM) · [unverified, flag for validation] (LOW)
@@ -95,6 +101,9 @@ Return a short summary only:
 Stack: [headline]
 Key pattern: [one]
 Top pitfall: [one]
+Key files (read before planning):
+- `path:line` — [why]
+[5–10, matching the Key Files section — or "none (greenfield)"]
 Wrote: ${phase_dir}/${padded}-RESEARCH.md ([N] lines)
 ```
 </output>

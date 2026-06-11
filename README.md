@@ -52,16 +52,25 @@ To uninstall the copied files: `./install.sh --uninstall /path/to/your/project`.
 1. **`/lite:map`** — *(existing codebases)* Maps the repo into `ARCHITECTURE.md` (stack, structure, conventions, testing, integrations) and `CONCERNS.md` (tech debt, risks). Run it before `/lite:start` so your project context is grounded in what already exists.
 2. **`/lite:start`** — Detects greenfield vs brownfield, runs the deep interview, and writes `PROJECT.md`, `REQUIREMENTS.md`, `FEATURES.md`, and an initial roadmap. Optionally researches the domain first.
 3. **`/lite:discuss <phase>`** — The per-phase interview. Surfaces the real implementation decisions ("gray areas"), asks one focused question at a time, and locks your answers into `CONTEXT.md`.
-4. **`/lite:plan <phase>`** — Researches the phase (`RESEARCH.md`), writes a single `PLAN.md` with all substeps, and runs a plan-quality check before you execute.
-5. **`/lite:execute <phase>`** — Builds the plan with atomic commits, tracks progress inline in `PLAN.md`, verifies the work against the phase goal, and writes `SUMMARY.md`.
+4. **`/lite:plan <phase>`** — Researches the phase (`RESEARCH.md`), writes a single `PLAN.md` whose steps are each sized for one focused build session, and runs a plan-quality check before you execute.
+5. **`/lite:execute <phase>`** — Orchestrates the phase **one step at a time**: it dispatches a fresh subagent per step, inspects each result against the real diff, fixes or re-plans as needed, then runs a goal-backward verification and writes `SUMMARY.md`. Keeping each step in its own fresh context is what holds build quality up across a long phase.
 
-Execution makes one clean, modular commit per substep with concise, imperative messages. Commit messages carry **no signatures, trailers, or attribution** (no `Co-Authored-By`, no "Generated with") — just the change description.
+Execution makes one clean, modular commit per step with concise, imperative messages. Commit messages carry **no signatures, trailers, or attribution** (no `Co-Authored-By`, no "Generated with") — just the change description.
 
 Supporting commands: **`/lite:phase`** (add/edit/insert/remove phases), **`/lite:status`** (where am I?), **`/lite:config`** (toggles), **`/lite:help`**.
 
 ## Determinism helper
 
 gsd-lite is prompt-native, but the bookkeeping that *must not drift* — phase-path/slug resolution, roadmap and state parsing + edits, status inference, config validation, and `commit_docs`-aware commits — is handled by one small, dependency-free Node script (`bin/lite.cjs`, ~300 lines, no `npm install`). Commands discover it automatically and prefer it; when it isn't present they fall back to doing the same work inline. It ships with both the plugin and the copy-script install. You never call it directly — the commands do.
+
+## Working with larger codebases
+
+gsd-lite deliberately relies on **agentic search (grep/glob/read) over markdown maps**, not a prebuilt index. That's the current industry default: agentic search outperforms vector retrieval for code, and indexes go stale the moment you edit. The `## Codebase orientation` block at the top of `ARCHITECTURE.md` plus the per-step "key files" lists give agents a cheap, always-fresh way in.
+
+A couple of optional upgrades for bigger repos, none bundled:
+
+- **Install an LSP plugin for your language** (`/plugin` → search "lsp"; Claude Code ≥ v2.0.74 ships native LSP tools). Precise go-to-definition and find-references beat grep for symbol-level work.
+- **For very large repos (1,000+ files)**, you can add an MCP companion yourself — e.g. **Serena** (LSP-based, strong for heavy refactoring) or **GitNexus** (a code knowledge graph; note its **PolyForm Noncommercial** license). These are opt-in; gsd-lite never installs them for you.
 
 ## On-disk layout
 

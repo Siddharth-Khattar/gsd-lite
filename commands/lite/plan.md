@@ -61,7 +61,7 @@ Read: ${PHASE_DIR}/${PADDED}-CONTEXT.md (honor locked decisions verbatim), .plan
 Write ${PHASE_DIR}/${PADDED}-RESEARCH.md. Return a short summary only.")
 ```
 
-When it returns, surface the headline findings (standard stack, key patterns, top pitfalls). Commit:
+When it returns, surface the headline findings (standard stack, key patterns, top pitfalls). Then **read the key files the researcher listed** (the 5–10 `file:line` entries in its return / RESEARCH.md's `## Key Files`) — a quick read of the load-bearing code so you ground the planner in reality rather than trusting the summary. Keep that list; you'll pass it to the planner. Commit:
 ```bash
 git add ${PHASE_DIR}/${PADDED}-RESEARCH.md && git commit -m "docs(phase-${PADDED}): research phase" >/dev/null 2>&1 || true
 ```
@@ -77,6 +77,7 @@ Spawn the **lite-planner** subagent:
 Agent(subagent_type="lite-planner", description="Plan phase [X]",
   prompt="Phase [X]: [name]. Goal: [goal]. Requirements: [REQ-IDs]. Today: [TODAY].
 Read: ${PHASE_DIR}/${PADDED}-CONTEXT.md, ${PHASE_DIR}/${PADDED}-RESEARCH.md, .planning/ARCHITECTURE.md, .planning/REQUIREMENTS.md, recent prior phase SUMMARY.md files.
+KEY FILES (read these first — the most load-bearing code for this phase): [paste the researcher's key-files list with file:line refs].
 Write a SINGLE plan at ${PHASE_DIR}/${PADDED}-PLAN.md containing ALL steps for the phase — each step sized so one fresh executor subagent finishes it in ~50-70k tokens (0-3 files = S, 4-6 = M, 7+ = split), with concrete Goal/Files/Approach/Key context/Done when/Size fields and NO placeholders — plus the must-haves block and the inline execution/verification tracking scaffold (see the lite-planner spec). Honor every locked decision in CONTEXT.md. Return a short summary only.")
 ```
 
