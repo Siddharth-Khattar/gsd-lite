@@ -34,7 +34,7 @@ When `$LITE` is set, PREFER: `lite phase <n>` (→ {padded, slug, dir}), `lite c
 Phase number from `$ARGUMENTS`. Read `.planning/config.json`, `.planning/PROJECT.md` (roadmap + state).
 
 ```bash
-PHASE=[number]; PADDED=$(printf "%02d" "$PHASE" 2>/dev/null || echo "$PHASE")
+PHASE=[number]; PADDED="$(printf '%02d' "${PHASE%%.*}")"; case "$PHASE" in *.*) PADDED="${PADDED}.${PHASE#*.}";; esac   # pad integer part, keep decimal suffix (2.1 → 02.1), matching bin/lite.cjs
 SLUG=[kebab-case phase name]; PHASE_DIR=".planning/phases/${PADDED}-${SLUG}"
 TODAY=$(date +%F)
 test -f ${PHASE_DIR}/${PADDED}-PLAN.md && echo "plan: ok" || echo "no plan"

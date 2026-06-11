@@ -57,7 +57,7 @@ When `$LITE` is set, PREFER: `lite phase <n>` (→ JSON {padded, slug, dir, name
 Phase number from `$ARGUMENTS` (required). Read `.planning/PROJECT.md` and find the phase in the `## Roadmap` section. If the phase isn't there, tell the user and point them at `/lite:status`. Get the phase name, goal, requirements, and success criteria.
 
 ```bash
-PHASE=[number]; PADDED=$(printf "%02d" "$PHASE" 2>/dev/null || echo "$PHASE")
+PHASE=[number]; PADDED="$(printf '%02d' "${PHASE%%.*}")"; case "$PHASE" in *.*) PADDED="${PADDED}.${PHASE#*.}";; esac   # pad integer part, keep decimal suffix (2.1 → 02.1), matching bin/lite.cjs
 SLUG=[kebab-case phase name]
 PHASE_DIR=".planning/phases/${PADDED}-${SLUG}"
 TODAY=$(date +%F)
